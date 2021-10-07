@@ -306,7 +306,30 @@ def tf_timbral_roughness(
     peak_picking_threshold=0.01,
 ):
     """
-     Copyright 2021 Antoine Lavault, Apeira Technologies, France
+     This function is an implementation of the Vassilakis [2007] model of roughness.
+     The peak picking algorithm implemented is based on the MIR toolbox's implementation.
+
+     This version of timbral_roughness contains self loudness normalising methods and can accept arrays as an input
+     instead of a string filename.
+
+     Version 0.4
+
+
+     Vassilakis, P. 'SRA: A Aeb-based researh tool for spectral and roughness analysis of sound signals', Proceedings
+     of the 4th Sound and Music Computing Conference, Lefkada, Greece, July, 2007.
+
+     Required parameter
+      :param fname:                 string, Audio filename to be analysed, including full file path and extension.
+
+     Optional parameters
+      :param dev_output:            bool, when False return the roughness, when True return all extracted features
+                                    (current none).
+      :param phase_correction:      bool, if the inter-channel phase should be estimated when performing a mono sum.
+                                    Defaults to False.
+
+      :return:                      Roughness of the audio signal.
+
+     Copyright 2018 Andy Pearce, Institute of Sound Recording, University of Surrey, UK.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.

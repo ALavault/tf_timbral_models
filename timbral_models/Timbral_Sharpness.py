@@ -123,7 +123,7 @@ def timbral_sharpness(
 
     windowed_sharpness = []
     windowed_rms = []
-    # print("true windowed audio ::", windowed_audio.shape)
+    #print("true windowed audio ::", windowed_audio.shape)
 
     for i in range(windowed_audio.shape[0]):
         samples = windowed_audio[i, :]
@@ -181,7 +181,30 @@ def tf_timbral_sharpness(
     audio_tensor, dev_output=False, phase_correction=False, clip_output=False, fs=0
 ):
     """
-     Copyright 2021 Antoine Lavault, Apeira Technologies, France
+     This is an implementation of the matlab sharpness function found at:
+     https://www.salford.ac.uk/research/sirc/research-groups/acoustics/psychoacoustics/sound-quality-making-products-sound-better/accordion/sound-quality-testing/matlab-codes
+
+     This function calculates the apparent Sharpness of an audio file.
+     This version of timbral_sharpness contains self loudness normalising methods and can accept arrays as an input
+     instead of a string filename.
+
+     Version 0.4
+
+     Originally coded by Claire Churchill Sep 2004
+     Transcoded by Andy Pearce 2018
+
+     Required parameter
+      :param fname:                   string, audio filename to be analysed, including full file path and extension.
+
+     Optional parameters
+      :param dev_output:              bool, when False return the warmth, when True return all extracted features
+      :param phase_correction:        Unused argument. Kept for compatibility.
+      :param clip_output:             bool, bool, force the output to be between 0 and 100.  Defaults to False.
+
+      :return                         Apparent sharpness of the audio file.
+
+
+     Copyright 2018 Andy Pearce, Institute of Sound Recording, University of Surrey, UK.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -205,11 +228,11 @@ def tf_timbral_sharpness(
     b = audio_samples_t.shape[0]
     rms_sharpness_array = []
     # windowed rms should be easy to implement in pure tensorflow
-    # print("audio_samples_t", audio_samples_t)
+    #print("audio_samples_t", audio_samples_t)
 
     windowed_audio = timbral_util.tf_window_audio(
         audio_samples_t, window_length=4096)
-    # print("windowed_audio", windowed_audio)
+    #print("windowed_audio", windowed_audio)
     windowed_rms = K.sqrt(K.mean(windowed_audio * windowed_audio, axis=-1))
     # Gradient here in windowed_rms and windowed_audio
     for i in range(b):

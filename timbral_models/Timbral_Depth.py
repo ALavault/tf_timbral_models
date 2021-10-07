@@ -291,7 +291,7 @@ def timbral_depth(fname, fs=0, dev_output=False, phase_correction=False, clip_ou
         all_metrics[4] = metric5
         all_metrics[5] = metric6
         all_metrics[6] = 1.0
-        # print(metric1, metric2, metric3, metric4, metric5, metric6)
+        #print(metric1, metric2, metric3, metric4, metric5, metric6)
 
         # perform linear regression
         depth = np.sum(all_metrics * coefficients)
@@ -307,7 +307,38 @@ def tf_timbral_depth(audio_tensor, fs, dev_output=False, phase_correction=False,
                      low_frequency_limit=20, centroid_crossover_frequency=2000, ratio_crossover_frequency=500,
                      db_decay_threshold=-40):
     """
-     Copyright 2021 Antoine Lavault, Apeira Technologies, France
+     This function calculates the apparent Depth of an audio file.
+     This version of timbral_depth contains self loudness normalising methods and can accept arrays as an input
+     instead of a string filename.
+
+     Version 0.4
+
+     Required parameter
+      :param fname:                        string or numpy array
+                                           string, audio filename to be analysed, including full file path and extension.
+                                           numpy array, array of audio samples, requires fs to be set to the sample rate.
+
+     Optional parameters
+      :param fs:                           int/float, when fname is a numpy array, this is a required to be the sample rate.
+                                           Defaults to 0.
+      :param phase_correction:             bool, perform phase checking before summing to mono.  Defaults to False.
+      :param dev_output:                   bool, when False return the depth, when True return all extracted
+                                           features.  Default to False.
+      :param threshold_db:                 float/int (negative), threshold, in dB, for calculating centroids.
+                                           Should be negative.  Defaults to -60.
+      :param low_frequency_limit:          float/int, low frequency limit at which to highpass filter the audio, in Hz.
+                                           Defaults to 20.
+      :param centroid_crossover_frequency: float/int, crossover frequency for calculating the spectral centroid, in Hz.
+                                           Defaults to 2000
+      :param ratio_crossover_frequency:    float/int, crossover frequency for calculating the ratio, in Hz.
+                                           Defaults to 500.
+
+      :param db_decay_threshold:           float/int (negative), threshold, in dB, for estimating duration.  Should be
+                                           negative.  Defaults to -40.
+
+      :return:                             float, aparent depth of audio file, float.
+
+     Copyright 2018 Andy Pearce, Institute of Sound Recording, University of Surrey, UK.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.

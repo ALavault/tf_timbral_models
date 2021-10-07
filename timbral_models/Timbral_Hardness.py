@@ -302,7 +302,33 @@ def timbral_hardness(fname, fs=0, dev_output=False, phase_correction=False, clip
 def tf_timbral_hardness(audio_tensor, fs, dev_output=False, phase_correction=False, clip_output=False, max_attack_time=0.1,
                         bandwidth_thresh_db=-75):
     """
-     Copyright 2021 Antoine Lavault, Apeira Technologies, France
+     This function calculates the apparent hardness of an audio file.
+     This version of timbral_hardness contains self loudness normalising methods and can accept arrays as an input
+     instead of a string filename.
+
+     Version 0.4
+
+     Required parameter
+      :param fname:                 string or numpy array
+                                    string, audio filename to be analysed, including full file path and extension.
+                                    numpy array, array of audio samples, requires fs to be set to the sample rate.
+
+     Optional parameters
+      :param fs:                    int/float, when fname is a numpy array, this is a required to be the sample rate.
+                                    Defaults to 0.
+      :param phase_correction:      bool, perform phase checking before summing to mono.  Defaults to False.
+      :param dev_output:            bool, when False return the depth, when True return all extracted
+                                    features.  Default to False.
+      :param clip_output:           bool, force the output to be between 0 and 100.
+      :param max_attack_time:       float, set the maximum attack time, in seconds.  Defaults to 0.1.
+      :param bandwidth_thresh_db:   float, set the threshold for calculating the bandwidth, Defaults to -75dB.
+
+
+      :return:                      float, Apparent hardness of audio file, float (dev_output = False/default).
+                                    With dev_output set to True returns the weighted mean bandwidth,
+                                    mean attack time, harmonic-percussive ratio, and unitless attack centroid.
+
+     Copyright 2018 Andy Pearce, Institute of Sound Recording, University of Surrey, UK.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.

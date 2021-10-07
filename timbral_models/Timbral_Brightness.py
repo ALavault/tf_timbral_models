@@ -299,43 +299,6 @@ def tf_timbral_brightness_2(
     minFreq=20,
     compensated=False,
 ):
-    """
-      This function calculates the apparent Brightness of an batch of audio tensors.
-
-      Version 0.0
-
-      Required parameter
-       :param audio_samples:       TF tensor to analyze requires fs to be set to the sample rate.
-
-      Optional parameters
-       :param fs:                  int/float, when fname is a numpy array, this is a required to be the sample rate.
-                                   Defaults to 0.
-       :param dev_output:          bool, when False return the brightness, when True return all extracted features.
-       :param clip_output:         bool, force the output to be between 0 and 100.
-       :param phase_correction:    bool, Perform phase checking before summing to mono.
-       :param threshold:           Threshold below which to ignore the energy in a time window, default to 0.
-       :param ratio_crossover:     Crossover frequency for calculating the HF energy ratio, default to 2000 Hz.
-       :param centroid_crossover:  Highpass frequency for calculating the spectral centroid, default to 100 Hz.
-       :param stepSize:            Step size for calculating spectrogram, default to 1024.
-       :param blockSize:           Block size (fft length) for calculating spectrogram, default to 2048.
-       :param minFreq:             Frequency for high-pass filtering audio prior to all analysis, default to 20 Hz.
-
-       :return:                    Apparent brightness of audio file, float.
-
-     Copyright 2021 Antoine Lavault, Apeira Technologies, France
-
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
-    """
     assert (
         len(audio_samples.get_shape().as_list()) == 3
     ), "Should be BNC at the input. Got {}".format(audio_samples)
