@@ -173,41 +173,7 @@ def timbral_booming(fname, fs=0, dev_output=False, phase_correction=False, clip_
 @tf.function
 def tf_timbral_booming(audio_samples, fs=0, dev_output=False, phase_correction=False, clip_output=False):
     """
-     This is an implementation of the hasimoto booming index feature.
-     There are a few fudge factors with the code to convert between the internal representation of the sound using the
-     same loudness calculation as the sharpness code.  The equation for calculating the booming index is not
-     specifically quoted anywhere so I've done the best i can with the code that was presented.
-
-     Shin, SH, Ih, JG, Hashimoto, T., and Hatano, S.: "Sound quality evaluation of the booming sensation for passenger
-      cars", Applied Acoustics, Vol. 70, 2009.
-
-     Hatano, S., and Hashimoto, T. "Booming index as a measure for
-      evaluating booming sensation", The 29th International congress and Exhibition on Noise Control Engineering, 2000.
-
-     This function calculates the apparent Boominess of an audio file.
-
-     This version of timbral_booming contains self loudness normalising methods and can accept arrays as an input
-     instead of a string filename.
-
-     Version 0.4
-
-     Required parameter
-      :param fname:                   string or numpy array
-                                      string, audio filename to be analysed, including full file path and extension.
-                                      numpy array, array of audio samples, requires fs to be set to the sample rate.
-
-     Optional parameters
-      :param fs:                      int/float, when fname is a numpy array, this is a required to be the sample rate.
-                                      Defaults to 0.
-      :param dev_output:              bool, when False return the warmth, when True return all extracted features.
-                                      Defaults to False.
-      :param phase_correction:        bool, if the inter-channel phase should be estimated when performing a mono sum.
-                                      Defaults to False.
-      :param clip_output:             bool, force the output to be between 0 and 100.
-
-      :return                         float, apparent boominess of the audio file.
-
-     Copyright 2018 Andy Pearce, Institute of Sound Recording, University of Surrey, UK.
+     Copyright 2021 Antoine Lavault, Apeira Technologies, France
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
