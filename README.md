@@ -41,6 +41,20 @@ The _reverb_ attribute is a classification model, returning 1 or 0, indicating i
 Version 0.0 : original release. 
 
 ## Citation
+```
+@proceedings{lavault_antoine_2022_6573361,
+  title        = {{Stylewavegan: Style-Based Synthesis of Drum Sounds 
+                   With Extensive Controls Using Generative
+                   Adversarial Networks}},
+  year         = 2022,
+  publisher    = {Zenodo},
+  month        = jun,
+  doi          = {10.5281/zenodo.6573361},
+  url          = {https://doi.org/10.5281/zenodo.6573361}
+}
+```
+
+## Citation
 
 For refencing these models, please reference "StyleWaveGAN: Style-based synthesis of drum sounds with extensive
 	controls using generative adversarial networks"
